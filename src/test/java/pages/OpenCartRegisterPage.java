@@ -1,8 +1,12 @@
 package pages;
 
+import io.cucumber.datatable.DataTable;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import util.SeleniumUtility;
+
+import java.util.List;
+import java.util.Map;
 
 public class OpenCartRegisterPage extends SeleniumUtility {
 
@@ -50,33 +54,22 @@ public class OpenCartRegisterPage extends SeleniumUtility {
         driver.get(url);
     }
 
-    public void clickMyAccount(){
+    public void userBrowsePageRegistration(){
         btnMyAccount.click();
-    }
-
-    public void clickBtnRegister(){
         btnRegister.click();
     }
 
-    public void setInputFirstName(String txtInputName){
-        inputFirstName.click();
-        inputFirstName.sendKeys(txtInputName);
+
+    public void fillRegistrationForm(DataTable dataTable){
+        List<Map<String,String>> registrationDetails =dataTable.asMaps(String.class, String.class);
+        for (Map<String, String> details : registrationDetails) {
+            inputFirstName.sendKeys(details.get("First Name"));
+            inputLastname.sendKeys(details.get("Last Name"));
+            inputEmail.sendKeys(details.get("Email"));
+            inputPassword.sendKeys(details.get("Password"));
+        }
     }
 
-    public void setInputLastname(String txtInputLastname){
-        inputLastname.click();
-        inputLastname.sendKeys(txtInputLastname);
-    }
-
-    public void setInputEmail(String txtInputEmail){
-        inputEmail.click();
-        inputEmail.sendKeys(txtInputEmail);
-    }
-
-    public void setInputPassword(String txtInputPassword){
-        inputPassword.click();
-        inputPassword.sendKeys(txtInputPassword);
-    }
 
     public void inputRadio() {
         btnInputRadio.click();
