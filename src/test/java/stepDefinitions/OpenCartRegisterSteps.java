@@ -39,6 +39,6 @@ public class OpenCartRegisterSteps {
 
     @Then("the user should see the logout confirmation message {string}")
     public void validateAccountLogOutTxt(String txtResultado){
-        Assert.assertEquals(txtResultado,  registerUserPage.validateAccountLogOutTxt());
+        Assert.assertEquals(txtResultado, registerUserPage.validateAccountLogOutTxt());
     }
 }
