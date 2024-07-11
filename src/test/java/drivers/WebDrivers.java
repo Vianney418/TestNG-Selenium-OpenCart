@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -17,6 +18,10 @@ public class WebDrivers {
     private static final ThreadLocal<WebDriver> driver = ThreadLocal.withInitial(() -> {
         WebDriverManager.chromedriver().setup();
         ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--incognito");
+        chromeOptions.addArguments("--disable-notifications");
+        chromeOptions.addArguments("--disable-popup-blocking");
+        chromeOptions.addArguments("--enable-automation");
         WebDriver webDriver = new ChromeDriver(chromeOptions);
         allDrivers.add(webDriver);
         currentDriver.set(webDriver);

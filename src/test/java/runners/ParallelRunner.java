@@ -14,7 +14,7 @@ import org.testng.annotations.DataProvider;
                 "timeline:test-output-thread/", "json:target/cucumber.json", "html:target/cucumber-reports.html"},
         monochrome = true,
         publish = true,
-        tags = "@AmazonSearch or @UserLoginOpenCart"
+        tags = "@OpenCartBuyProduct"
 )
 public class ParallelRunner extends AbstractTestNGCucumberTests {
 

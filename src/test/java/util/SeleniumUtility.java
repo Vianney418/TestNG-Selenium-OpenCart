@@ -1,6 +1,7 @@
 package util;
 
 import drivers.WebDrivers;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -28,10 +29,23 @@ public class SeleniumUtility {
         actions = new Actions(driver);
     }
 
-    protected void waitForElement(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, 15);
+    protected void waitForVisibleElement(WebElement element) {
+        WebDriverWait wait = new WebDriverWait(driver, 30);
         wait.until(ExpectedConditions.visibilityOf(element));
     }
+
+
+    protected void waitForClickeableElement(WebElement element) {
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+    }
+
+    public void scrollToElement(WebElement webElement, int yOffset) {
+        int elementPosition = webElement.getLocation().getY();
+        int offsetPosition = elementPosition - yOffset;
+        ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, arguments[0]);", offsetPosition);
+    }
+
 
 
 

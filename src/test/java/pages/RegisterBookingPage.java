@@ -1,6 +1,5 @@
 package pages;
 
-import net.bytebuddy.pool.TypePool;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import util.SeleniumUtility;
@@ -48,7 +47,7 @@ public class RegisterBookingPage extends SeleniumUtility {
     }
 
     public void enterPassword(String txtPassword1){
-        waitForElement(passwordInput);
+        waitForVisibleElement(passwordInput);
         passwordInput.click();
         passwordInput.sendKeys(txtPassword1);
     }
@@ -63,7 +62,7 @@ public class RegisterBookingPage extends SeleniumUtility {
     }
 
     public void closePopOut() {
-        waitForElement(buttonEntendido);
+        waitForVisibleElement(buttonEntendido);
         buttonEntendido.click();
     }
 }

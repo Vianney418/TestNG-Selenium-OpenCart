@@ -50,7 +50,7 @@ public class OpenCartUserLoginPage extends SeleniumUtility {
     }
 
     public String ValidateLogInTxt(){
-        waitForElement(myAccountTxt);
+        waitForVisibleElement(myAccountTxt);
         return myAccountTxt.getText();
     }
 }

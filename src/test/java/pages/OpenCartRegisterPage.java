@@ -29,10 +29,10 @@ public class OpenCartRegisterPage extends SeleniumUtility {
     @FindBy(id = "input-password")
     WebElement inputPassword;
 
-    @FindBy(name = "newsletter")
+    @FindBy(id = "input-newsletter")
     WebElement btnInputRadio;
 
-    @FindBy(xpath = "//input[contains(@type,'checkbox')]")
+    @FindBy(name = "agree")
     WebElement inputCheckbox;
 
     @FindBy(xpath = "//button[@type='submit'][contains(.,'Continue')]")
@@ -41,7 +41,7 @@ public class OpenCartRegisterPage extends SeleniumUtility {
     @FindBy(xpath = "//h1[contains(.,'Your Account Has Been Created!')]")
     WebElement createdAccountText;
 
-    @FindBy(xpath = "//a[@class='dropdown-item' and @href='https://demo.opencart.com/index.php?route=account/logout&language=en-gb']")
+    @FindBy(xpath = "(//a[contains(@class,'dropdown-item')])[8]")
     WebElement btnLogOut;
 
     @FindBy(xpath = "//h1[contains(.,'Account Logout')]")
@@ -82,18 +82,18 @@ public class OpenCartRegisterPage extends SeleniumUtility {
     }
 
     public String validateCreatedAccountText(){
-        waitForElement(createdAccountText);
+        waitForVisibleElement(createdAccountText);
         return createdAccountText.getText();
     }
 
     public void userLogOut(){
-        waitForElement(createdAccountText);
+        waitForVisibleElement(createdAccountText);
         btnMyAccount.click();
         btnLogOut.click();
     }
 
     public String validateAccountLogOutTxt(){
-        waitForElement(accountLogOutTxt);
+        waitForVisibleElement(accountLogOutTxt);
         return accountLogOutTxt.getText();
     }
 

@@ -30,5 +30,4 @@ public class OpenCartUserLoginSteps {
         Assert.assertEquals(txtResultadoEsperado, userLoginPage.ValidateLogInTxt());
     }
 
-
 }
