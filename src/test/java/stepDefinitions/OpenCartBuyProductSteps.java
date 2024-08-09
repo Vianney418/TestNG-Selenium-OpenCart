@@ -1,11 +1,14 @@
 package stepDefinitions;
 
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en_scouse.An;
 import pages.OpenCartBuyProductPage;
+
+import javax.xml.crypto.Data;
 
 public class OpenCartBuyProductSteps {
 
@@ -26,8 +29,17 @@ public class OpenCartBuyProductSteps {
     }
 
     @When("the user adds the products to the cart")
-    public void sendProductsToCart() {buyProductPage.sendProductsToCart();}
+    public void searchProduct() {buyProductPage.searchProduct();}
 
     @And("the user navigates to the shopping cart page")
     public void browseShoppingCart() {buyProductPage.browseShoppingCart();}
+
+    @And("the user estimates the cost of shipping to Chile")
+    public void estimateShippingTaxes() {buyProductPage.estimateShippingTaxes();}
+
+    @And("the user navigates to the checkout page")
+    public void continueWithCheckout() {buyProductPage.continueWithCheckout();}
+
+    @And("the user enters personal details and payment methods with the following details:")
+    public void formShippingAddress(DataTable dataTable) {buyProductPage.formShippingAddress(dataTable);}
 }

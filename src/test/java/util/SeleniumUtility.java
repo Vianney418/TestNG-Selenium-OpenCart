@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 public class SeleniumUtility {
 
     public WebDriver driver = null;
-
+protected WebDriverWait wait;
     WebDrivers webDrivers;
     protected Actions actions;
 
@@ -27,18 +27,18 @@ public class SeleniumUtility {
         driver.manage().deleteAllCookies();
         driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
         actions = new Actions(driver);
+        wait = new WebDriverWait(driver, 10);
     }
 
     protected void waitForVisibleElement(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, 30);
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
 
     protected void waitForClickeableElement(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, 30);
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
+
 
     public void scrollToElement(WebElement webElement, int yOffset) {
         int elementPosition = webElement.getLocation().getY();
@@ -47,6 +47,64 @@ public class SeleniumUtility {
     }
 
 
+
+    public void scrollForVariableHeight() {
+        try {
+            long lastHeight = (long) ((JavascriptExecutor) driver).executeScript("return document.body.scrollHeight");
+
+            while (true) {
+                ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, document.body.scrollHeight);");
+                Thread.sleep(2000);
+
+                long newHeight = (long) ((JavascriptExecutor) driver).executeScript("return document.body.scrollHeight");
+                if (newHeight == lastHeight) {
+                    break;
+                }
+                lastHeight = newHeight;
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    protected void scrollToElementOnVariableHeight(WebElement element) {
+        try {
+            // Obtener la ubicación del elemento
+            int elementPosition = element.getLocation().getY();
+
+            long lastHeight = (long) ((JavascriptExecutor) driver).executeScript("return document.body.scrollHeight");
+
+            while (true) {
+                // Hacer scroll hasta la ubicación del elemento
+                ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, " + elementPosition + ");");
+                Thread.sleep(2000);
+
+                // Obtener la nueva altura del documento
+                long newHeight = (long) ((JavascriptExecutor) driver).executeScript("return document.body.scrollHeight");
+
+                // Verificar si el elemento está en la vista
+                boolean isElementInView = (Boolean) ((JavascriptExecutor) driver).executeScript(
+                        "var element = arguments[0];" +
+                                "var rect = element.getBoundingClientRect();" +
+                                "return (rect.top >= 0 && rect.bottom <= window.innerHeight);",
+                        element
+                );
+
+                if (isElementInView) {
+                    break;
+                }
+
+                // Verificar si la altura del documento ha cambiado (para evitar bucles infinitos)
+                if (newHeight == lastHeight) {
+                    break;
+                }
+                lastHeight = newHeight;
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 }
