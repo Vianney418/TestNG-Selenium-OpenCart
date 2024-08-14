@@ -28,8 +28,7 @@ public class OpenCartWishListPage extends SeleniumUtility {
     WebElement inputCloset;
    @FindBy(id = "wishlist-total")
    WebElement wishListBtn;
-   @FindBy(xpath = "//p[contains(.,'Powered By OpenCart Your Store © 2024')]")
-   WebElement scrollBtn;
+
 
 
 
@@ -51,7 +50,6 @@ public class OpenCartWishListPage extends SeleniumUtility {
     }
 
     public void selectProducts(){
-        //scrollToPosition(0, 80);  //  desplazar 50 píxeles hacia abajo
         scrollForVariableHeight();
         product1.click();
         product2.click();
