@@ -1,7 +1,7 @@
 @LoginValidation
 
 
-  Feature: User registration and data validation
+  Feature: User registration and data validation..
 
     Scenario: Check that the form has data validation
       When user visits E-comm page "http://localhost:4200/"
