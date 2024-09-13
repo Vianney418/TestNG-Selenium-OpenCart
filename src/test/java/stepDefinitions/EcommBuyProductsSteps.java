@@ -12,9 +12,9 @@ public class EcommBuyProductsSteps {
     EcommBuyProductsPage buyProductsPage = new EcommBuyProductsPage();
 
 
-    @When("user visit E-comm page {string}")
+    @Given("user visit E-comm page {string}")
     public void starBrowser(String url) {buyProductsPage.starBrowser(url);}
-    @Given("the user selects multiple products")
+    @When("the user selects multiple products")
     public void selectedProductsXCart() {buyProductsPage.selectedProductsXCart();}
     @And("the user goes to shopping cart")
     public void cartBtn() {buyProductsPage.cartBtn();}
